@@ -6,8 +6,8 @@
 #include <Update.h>
 
 const char* host = "esp32";
-const char* ssid = "Nha Tao";
-const char* password = "25251325";
+const char* ssid = "hellovtag";
+const char* password = "12345678";
 
 WebServer server(80);
 
@@ -23,13 +23,13 @@ String style =
 /* Login page */
 String loginIndex = 
 "<form name=loginForm>"
-"<h1>ESP32 Login</h1>"
+"<h1>ESP32 FOTA</h1>"
 "<input name=userid placeholder='User ID'> "
 "<input name=pwd placeholder=Password type=Password> "
 "<input type=submit onclick=check(this.form) class=btn value=Login></form>"
 "<script>"
 "function check(form) {"
-"if(form.userid.value=='admin' && form.pwd.value=='admin')"
+"if(form.userid.value=='admin' && form.pwd.value=='khuenguyencreator')"
 "{window.open('/serverIndex')}"
 "else"
 "{alert('Error Password or Username')}"
@@ -101,13 +101,14 @@ void setup(void) {
   Serial.println(WiFi.localIP());
 
   /*use mdns for host name resolution*/
-  if (!MDNS.begin(host)) { //http://esp32.local
+  if (!MDNS.begin(host)) { //http://esp32
     Serial.println("Error setting up MDNS responder!");
     while (1) {
       delay(1000);
     }
   }
   Serial.println("mDNS responder started");
+
   /*return index page which is stored in serverIndex */
   server.on("/", HTTP_GET, []() {
     server.sendHeader("Connection", "close");
